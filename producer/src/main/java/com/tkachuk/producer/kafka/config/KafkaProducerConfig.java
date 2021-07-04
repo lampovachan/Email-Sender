@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.std.StringSerializer;
+import com.tkachuk.producer.kafka.MessageProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
@@ -23,27 +25,35 @@ import java.util.Map;
 
 @Configuration
 public class KafkaProducerConfig {
-    private final KafkaProducerProperties producerProperties;
+    @Value(value = "${kafka.bootstrapAddress}")
+    private String bootstrapAddress;
 
-    public KafkaProducerConfig(KafkaProducerProperties producerProperties) {
-        this.producerProperties = producerProperties;
-    }
-
+    /**
+     * Producer factory bean creaion
+     * @return ProducerFactory bean
+     */
     @Bean
-    KafkaTemplate<String, Message<?>> kafkaTemplate() {
-        return new KafkaTemplate<>(kafkaProducerConfiguration());
+    public ProducerFactory<String, Mail> mailProducerFactory() {
+        Map<String, Object> configProps = new HashMap<>();
+        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
+        configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, MailSerializer.class);
+        return new DefaultKafkaProducerFactory<>(configProps);
     }
 
-    private ObjectMapper objectMapper() {
-        return Jackson2ObjectMapperBuilder.json()
-                .visibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
-                .build();
+    /**
+     * @return KafkaMailProducer bean
+     */
+    @Bean
+    public MessageProducer messageProducer() {
+        return new MessageProducer();
     }
 
-    private ProducerFactory<String, Message<?>> kafkaProducerConfiguration() {
-        Map<String, Object> properties = new HashMap<>();
-        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, producerProperties.getBootstrapServers());
-        properties.put(ProducerConfig.ACKS_CONFIG, "all");
-        return new DefaultKafkaProducerFactory<>(properties, new StringSerializer(), new JsonSerializer<>(objectMapper()));
+    /**
+     * @return kafka template used by producer to access kafka topics
+     */
+    @Bean
+    public KafkaTemplate<String, Mail> mailKafkaTemplate() {
+        return new KafkaTemplate<String, Mail>(mailProducerFactory());
     }
 }
