@@ -1,15 +1,13 @@
 package com.tkachuk.producer.kafka;
 
-import com.tkachuk.dto.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
-import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.util.concurrent.ListenableFutureCallback;
+
 
 /**
  * This class describes the process of writing data to Kafka.
@@ -18,26 +16,26 @@ import org.springframework.util.concurrent.ListenableFutureCallback;
 @NoArgsConstructor
 @Component
 public class MessageProducer {
+    private Logger LOGGER = LoggerFactory.getLogger(MessageProducer.class);
 
     @Autowired
-    private KafkaTemplate<String, Data> kafkaTemplate;
+    private KafkaTemplate<String, Mail> messageKafkaTemplate;
 
-    @Value(value = "${kafka.topic.name}")
+    @Value(value = "${kafka.mail.topic.name}")
     private String topicName;
 
+    public void sendMessage(Mail message) {
+        ListenableFuture<SendResult<String, Mail>> future = messageKafkaTemplate.send(topicName, new Random().nextLong() + "", message);
+        future.addCallback(new ListenableFutureCallback<SendResult<String, Mail>>() {
 
-    public void sendMessage(Data data) {
-        ListenableFuture<SendResult<String, Data>> future = kafkaTemplate.send(topicName, data);
-
-        future.addCallback(new ListenableFutureCallback<SendResult<String, Data>>() {
             @Override
-            public void onFailure(Throwable throwable) {
-                log.error("Unable to send message = {} dut to: {}", data, throwable.getMessage());
+            public void onSuccess(SendResult<String, Mail> result) {
+                LOGGER.info("Sent message=[" + message + "] with offset=[" + result.getRecordMetadata().offset() + "]");
             }
 
             @Override
-            public void onSuccess(SendResult<String, Data> stringDataSendResult) {
-                log.info("Sent Message = {} with offset = {}", data, stringDataSendResult.getRecordMetadata().offset());
+            public void onFailure(Throwable ex) {
+                LOGGER.info("Unable to send message=[" + message + "] due to : " + ex.getMessage());
             }
         });
     }
