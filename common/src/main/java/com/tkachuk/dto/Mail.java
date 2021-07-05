@@ -1,92 +1,34 @@
 package com.tkachuk.dto;
 
-import java.net.URI;
-
+/**
+ * This class represents dto for transferring and reading.
+ */
 public class Mail {
-    private String from;
-    private String to;
-    private String subject;
-    private String body;
-    private URI url;
 
-    /**
-     * @return the from
-     */
-    public String getFrom() {
-        return from;
+    private String mail;
+    private String isbn;
+
+    public String getMail() {
+        return mail;
     }
 
-    /**
-     * @param from the from to set
-     */
-    public void setFrom(String from) {
-        this.from = from;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
-    /**
-     * @return the to
-     */
-    public String getTo() {
-        return to;
+    public String getIsbn() {
+        return isbn;
     }
 
-    /**
-     * @param to the to to set
-     */
-    public void setTo(String to) {
-        this.to = to;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
-    /**
-     * @return the subject
-     */
-    public String getSubject() {
-        return subject;
+    public Mail(String bookName, String isbn) {
+        this.mail = bookName;
+        this.isbn = isbn;
     }
 
-    /**
-     * @param subject the subject to set
-     */
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    /**
-     * @return the body
-     */
-    public String getBody() {
-        return body;
-    }
-
-    /**
-     * @param body the body to set
-     */
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    /**
-     * @return the uri
-     */
-    public URI getUrl() {
-        return url;
-    }
-
-    /**
-     * @param url the uri to set
-     */
-    public void setUrl(URI url) {
-        this.url = url;
-    }
-
-    @Override
-    public String toString() {
-        return "{"
-                + "\"from\":" + this.getFrom() + "\""
-                + "\"to\";" + this.getTo() + "\""
-                + "\"subject\":" + this.getSubject() + "\""
-                + "\"body\":" + this.getBody() + "\""
-                + "\"uri\":" + this.getUrl() + "\""
-                + "}";
+    public Mail() {
     }
 }
