@@ -23,6 +23,6 @@ Start both producer and consumer projects. Enter app for API testing (such as Po
 localhost:8081/publish
 ```
 
-If everything's OK, the email testing program would show you the mail sent on the email you've notified.
+If everything's OK, the email testing program would show you the email sent on the mail you've notified.
 
 
