@@ -2,9 +2,9 @@
 
 This repository contains three projects. The first one is common files for both projects, the second one is producer, and the third one is consumer. 
 
-Producer uses Spring Boot with Spring Kafka to publish JSON/String message which contains user mail to a Kafka topic. 
+Producer uses Spring Boot with Spring Kafka to publish JSON/String message, which contains user mail, to a Kafka topic. 
 
-Consumer receives this JSON/String message which contains mail from Kafka and sends email on this mail.
+Consumer receives this JSON/String message, which contains mail, from Kafka and sends email on this mail.
 
 Email sending was tested using https://mailtrap.io
 
