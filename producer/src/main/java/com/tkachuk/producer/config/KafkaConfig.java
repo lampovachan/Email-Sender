@@ -1,4 +1,4 @@
-package com.tkachuk.producer;
+package com.tkachuk.producer.config;
 
 import com.tkachuk.dto.Mail;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -13,8 +13,13 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class contains typical Kafka configuration.
+ */
+
 @Configuration
 public class KafkaConfig {
+
     @Bean
     public ProducerFactory<String, Mail> producerFactory()
     {

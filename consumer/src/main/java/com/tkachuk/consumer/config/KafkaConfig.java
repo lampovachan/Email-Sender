@@ -1,4 +1,4 @@
-package com.tkachuk.consumer;
+package com.tkachuk.consumer.config;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -12,6 +12,9 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * This class contains typical Kafka configuration.
+ */
 @EnableKafka
 @Configuration
 public class KafkaConfig {
@@ -34,6 +37,6 @@ public class KafkaConfig {
     {
         ConcurrentKafkaListenerContainerFactory<String,String> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
-        return  factory;
+        return factory;
     }
 }

@@ -1,4 +1,4 @@
-package com.tkachuk.consumer;
+package com.tkachuk.consumer.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +8,9 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.Properties;
 
+/**
+ * This class contains typical mail configuration.
+ */
 @Configuration
 public class MailConfig {
     @Value(value = "${spring.mail.username}")
@@ -22,9 +25,6 @@ public class MailConfig {
     @Value(value = "${spring.mail.host}")
     private String host;
 
-    /**
-     * @return mail sender
-     */
     @Bean
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();

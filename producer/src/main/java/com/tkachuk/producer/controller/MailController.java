@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
-
+/**
+ * This class contains endpoint for sending message using post method.
+ * @author Svitlana Tkachuk
+ */
 @RestController
 public class MailController {
 
