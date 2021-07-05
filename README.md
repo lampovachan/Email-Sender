@@ -18,7 +18,7 @@ To start Zookeeper and Kafka, use this commands:
 .\bin\windows\kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic NewTopic --from-beginning
 ```
 
-Start producer and consumer projects. Enter app for API testing (such as Postman) and send POST query with body which contains mail to this adress: 
+Start both producer and consumer projects. Enter app for API testing (such as Postman) and send POST query with body, which contains mail, to this adress: 
 ```
 localhost:8081/publish
 ```
