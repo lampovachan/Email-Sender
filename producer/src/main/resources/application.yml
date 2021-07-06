@@ -1,0 +1,4 @@
+kafka:
+    bootstrapAddress: 127.0.0.1:9092
+server:
+    port: 8081

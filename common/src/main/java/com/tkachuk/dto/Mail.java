@@ -15,10 +15,9 @@ public class Mail {
         this.mail = mail;
     }
 
-    public Mail(String bookName, String isbn) {
-        this.mail = bookName;
+    public Mail(String mail) {
+        this.mail = mail;
     }
 
-    public Mail() {
-    }
+    public Mail() {}
 }

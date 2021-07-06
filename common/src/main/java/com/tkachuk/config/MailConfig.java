@@ -1,4 +1,4 @@
-package com.tkachuk.consumer.config;
+package com.tkachuk.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +11,7 @@ import java.util.Properties;
 /**
  * This class contains typical mail configuration.
  */
+
 @Configuration
 public class MailConfig {
     @Value(value = "${spring.mail.username}")

@@ -15,21 +15,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class KafkaConsumer {
-    @Autowired
-    JavaMailSender mailSender;
 
     @KafkaListener(topics = "NewTopic", groupId = "group_id")
     public void consume(String message)
     {
         //This magic trick was found on https://stackoverflow.com/questions/1688099/converting-json-data-to-java-object
         Mail mail = new Gson().fromJson(message, Mail.class);
-
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(mail.getMail());
-        msg.setFrom("kafkamail@gmail.com");
-        msg.setSubject("Testing from Spring Boot");
-        msg.setText("Hello World \n Spring Boot Email");
-
-        mailSender.send(msg);
+        MailService mailService = new MailService();
+        mailService.creatingEmail(mail);
     }
 }

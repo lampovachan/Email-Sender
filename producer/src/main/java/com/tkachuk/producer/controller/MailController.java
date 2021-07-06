@@ -1,6 +1,7 @@
 package com.tkachuk.producer.controller;
 
 import com.tkachuk.dto.Mail;
+import com.tkachuk.producer.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,8 @@ public class MailController {
     @PostMapping("/publish")
     public String publishMessage(@RequestBody Mail mail)
     {
-        kafkaTemplate.send(TOPIC, mail);
+        MessageService messageService = new MessageService();
+        messageService.sendMessage(mail);
         return "Published Successfully!";
     }
 }

@@ -1,0 +1,15 @@
+kafka:
+    bootstrapAddress: 127.0.0.1:9092
+server:
+    port: 9091
+spring:
+    mail:
+        host: smtp.mailtrap.io
+        password: 766b70c77d3770
+        port: 2525
+        properties:
+            mail:
+                smtp:
+                    starttls:
+                        enable: true
+        username: 5aaece5c6543b7
