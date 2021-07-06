@@ -11,7 +11,6 @@ import java.util.Properties;
 /**
  * This class contains typical mail configuration.
  */
-
 @Configuration
 public class MailConfig {
     @Value(value = "${spring.mail.username}")

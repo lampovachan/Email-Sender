@@ -10,11 +10,10 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MessageService {
-    private static final String TOPIC = "NewTopic";
-    @Autowired
-    KafkaTemplate<String, Mail> kafkaTemplate;
 
-    public void sendMessage(Mail mail) {
+    private static final String TOPIC = "NewTopic";
+
+    public void sendMessage(@Autowired KafkaTemplate kafkaTemplate, Mail mail) {
         kafkaTemplate.send(TOPIC, mail);
     }
 }

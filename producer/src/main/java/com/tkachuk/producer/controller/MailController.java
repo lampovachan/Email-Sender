@@ -16,13 +16,10 @@ public class MailController {
     @Autowired
     KafkaTemplate<String, Mail> kafkaTemplate;
 
-    private static final String TOPIC = "NewTopic";
-
     @PostMapping("/publish")
-    public String publishMessage(@RequestBody Mail mail)
-    {
+    public String publishMessage(@RequestBody Mail mail) {
         MessageService messageService = new MessageService();
-        messageService.sendMessage(mail);
-        return "Published Successfully!";
+        messageService.sendMessage(kafkaTemplate, mail);
+       return "Published Successfully!";
     }
 }
