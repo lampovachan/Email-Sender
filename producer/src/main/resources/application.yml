@@ -1,4 +1,14 @@
-kafka:
-    bootstrapAddress: kafka:9092
+spring:
+    application:
+        name: producer
 server:
     port: 8081
+eureka:
+    client:
+        registerWithEureka: true
+        fetchRegistry: true
+        serviceUrl:
+            defaultZone: http://localhost:8070/eureka/
+    instance:
+        hostname: localhost
+
