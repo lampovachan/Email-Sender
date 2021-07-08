@@ -1,8 +1,8 @@
-kafka:
-    bootstrapAddress: kafka:9092
 server:
     port: 9091
 spring:
+    application:
+        name: hello-client
     mail:
         host: smtp.mailtrap.io
         password: 766b70c77d3770
@@ -13,3 +13,21 @@ spring:
                     starttls:
                         enable: true
         username: 5aaece5c6543b7
+eureka:
+    client:
+        registerWithEureka: true
+        fetchRegistry: true
+        serviceUrl:
+            defaultZone: http://localhost:8070/eureka/
+    instance:
+        hostname: localhost
+
+hystrix:
+    command:
+        default:
+            execution:
+                isolation:
+                    thread:
+                        timeoutInMilliseconds: 60000
+
+
