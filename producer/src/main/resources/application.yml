@@ -1,14 +1,13 @@
-spring:
-    application:
-        name: producer
-server:
-    port: 8081
 eureka:
     client:
-        registerWithEureka: true
         fetchRegistry: true
+        registerWithEureka: true
         serviceUrl:
             defaultZone: http://localhost:8070/eureka/
     instance:
         hostname: localhost
-
+server:
+    port: 8081
+spring:
+    application:
+        name: producer

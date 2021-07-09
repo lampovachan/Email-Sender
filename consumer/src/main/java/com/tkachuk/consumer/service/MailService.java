@@ -14,7 +14,7 @@ public class MailService {
     public void creatingEmail(Mail mail, JavaMailSenderImpl mailSender) {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setTo(mail.getMail());
-        msg.setFrom("kafkamail@gmail.com");
+        msg.setFrom("svetamail@gmail.com");
         msg.setSubject("Testing from Spring Boot");
         msg.setText("Hello World \n Spring Boot Email");
         mailSender.send(msg);

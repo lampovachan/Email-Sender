@@ -1,33 +1,23 @@
 zuul:
-    #Service will be mapped under the /api URI
-    prefix: /api
-    routes:
-        producer:
-            path: /producer/**
-            url: http://localhost:8081
-        consumer:
-            path: /consumer/**
-            serviceId:  CONSUMER
+  prefix: /api
+  routes:
+    producer:
+      path: /producer/**
+      serviceId: PRODUCER
+    consumer:
+      path: /consumer/**
+      url: http://localhost:9091
 
 eureka:
-    client:
-        serviceUrl:
-            defaultZone: http://localhost:8070/eureka/
-    instance:
-        hostname: localhost
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8070/eureka/
+  instance:
+    hostname: localhost
 
 server:
-    port: 8079
+  port: 8079
 
 spring:
-    application:
-        name: zuul-service
-
-# Increase the Hystrix timeout to 60s (for all)
-hystrix:
-    command:
-        default:
-            execution:
-                isolation:
-                    thread:
-                        timeoutInMilliseconds: 60000
+  application:
+    name: zuul-service
