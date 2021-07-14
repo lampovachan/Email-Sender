@@ -1,4 +1,4 @@
-# Email-Sender-with-Kafka
+# Email-Sender
 
 This repository contains three projects. The first one is common files for both projects, the second one is producer, and the third one is consumer. 
 
