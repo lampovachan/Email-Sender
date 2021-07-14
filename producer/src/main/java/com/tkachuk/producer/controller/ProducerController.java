@@ -2,9 +2,7 @@ package com.tkachuk.producer.controller;
 
 import com.tkachuk.dto.Mail;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 
 /**
@@ -16,13 +14,11 @@ import org.springframework.web.client.RestTemplate;
 @RequestMapping("/rest/producer")
 public class ProducerController {
     @Autowired
-    private RestTemplate restTemplate;
+    private FeignInterface feignInterface;
 
     @PostMapping("/publish")
     public String publishMessage(@RequestBody Mail mail) {
-        String url = "http://localhost:9091/rest/consumer/receive";
-        HttpEntity<Mail> requestBody = new HttpEntity<>(mail);
-        restTemplate.postForEntity(url, requestBody, Mail.class);
-        return "Request resend to consumer!";
+        feignInterface.consume(mail);
+        return "Message was sent successfully!";
     }
 }
