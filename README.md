@@ -1,4 +1,4 @@
-# Email-Sender
+# Email-Sender-With-Spring-Cloud
 
 This repository contains producer and consumer microsevises connected with Spring Cloud/Netflix technologies, Zuul as gateway service and Eureka as service discovery.
 
