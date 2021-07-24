@@ -1,34 +1,9 @@
 # Email-Sender
 
-This repository contains three projects. The first one is common files for both projects, the second one is producer, and the third one is consumer. 
+This repository contains producer and consumer microsevises connected with Spring Cloud/Netflix technologies, Zuul as gateway service and Eureka as service discovery.
 
-Producer uses Spring Boot with Spring Kafka to publish JSON/String message, which contains user mail, to a Kafka topic. 
+Producer uses Feign Client to send JSON/String message, which contains user mail, to consumer. 
 
-Consumer receives this JSON/String message, which contains mail, from Kafka and sends email on this mail.
+Consumer receives this JSON/String message, which contains mail, and sends email on this mail.
 
 Email sending was tested using https://mailtrap.io
-
-To start Zookeeper and Kafka, use this commands: 
-
-```
-.\bin\windows\zookeeper-server-start.bat config\zookeeper.properties
-
-.\bin\windows\kafka-server-start.sh config\server.properties
-
-.\bin\windows\kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic NewTopic --from-beginning
-```
-
-Start both producer and consumer projects. Enter app for API testing (such as Postman) and send POST query with body, which contains mail, such as 
-```
-{
-    "mail": "yourmail@gmail.com"
-} 
-```
-to this adress: 
-```
-localhost:8081/publish
-```
-
-If everything's OK, the email testing program would show you the email sent on the mail you've notified.
-
-
